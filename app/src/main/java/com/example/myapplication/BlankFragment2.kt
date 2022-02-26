@@ -7,37 +7,39 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
-import com.example.myapplication.databinding.FragmentBlankBinding
+import com.example.myapplication.databinding.FragmentBlank2Binding
 
-class BlankFragment : Fragment() {
-
+class BlankFragment2 : Fragment() {
     private val dataModel: DataModel by activityViewModels()
-    private lateinit var binding: FragmentBlankBinding
+    private lateinit var binding: FragmentBlank2Binding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentBlankBinding.inflate(inflater)
+        binding = FragmentBlank2Binding.inflate(inflater)
         return binding.root
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        dataModel.messageToFragment1.observe(activity as LifecycleOwner, {
-            binding.message.text = it
+
+        dataModel.messageToFragment2.observe(activity as LifecycleOwner, {
+            binding.message2.text = it
         })
 
-        binding.btnSendToFragment2.setOnClickListener{
-            dataModel.messageToFragment2.value = "Hello from Fragment1"
+        binding.btnSendToActivity.setOnClickListener{
+            dataModel.messageToActivity.value = "This is message from Fragment2 to Activity"
         }
 
-        binding.btnSendToActivity.setOnClickListener{
-            dataModel.messageToActivity.value = "Hello activity from Fragment1 "
+        binding.btnSendToFragment1.setOnClickListener{
+            dataModel.messageToFragment1.value = "This is message from Fragment2 to Fragment1"
         }
     }
 
     companion object {
         @JvmStatic
-        fun newInstance() = BlankFragment()
+        fun newInstance() = BlankFragment2()
     }
 }
